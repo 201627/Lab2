@@ -14,15 +14,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 public class SpellCheckerController {
 	
-	Dictionary model;
 	
-	public void setModel(Dictionary model){
-		this.model =  model;
-	}
-
     @FXML
     private ResourceBundle resources;
 
@@ -39,7 +35,7 @@ public class SpellCheckerController {
     private Button btnCheck;
 
     @FXML
-    private TextArea txtOutput;
+    private TextFlow txtOutput;
 
     @FXML
     private Label lblErrori;
@@ -57,47 +53,42 @@ public class SpellCheckerController {
     @FXML
     void doCheck(ActionEvent event) {
     	
+    	List<RichWord>  outputList;
+    	String input;
+    	String word;
+    	LinkedList<String> inputList = new LinkedList<String>();
     	
-    	String input = txtInput.getText();
+    	input = txtInput.getText();
     	input.trim().toLowerCase().replaceAll("[^A-Za-z0-9 ]", "");
     	
     	StringTokenizer st = new StringTokenizer(input, " ");
-    	String word = null;
-    	LinkedList<String> inputList = new LinkedList<String>();
-
-    	try{
-    		while ((word = st.nextToken() )!=null){
-    			
-    			inputList.add(word);
-    			
-    		}
-    	}catch(NoSuchElementException e){
-    		
-    	}
-    	List<RichWord>  outputList;
+    	while (st.hasMoreTokens())
+    		inputList.add(st.nextToken());
+    	
+    	
     	double t0 = System.nanoTime();
     	if (cboxLanguage.getValue().equals("Italian")){
     		outputList = ita.spellCheckText(inputList);
     	}else{
-    		outputList = eng.spellCheckText(inputList);
-    		
+    		outputList = eng.spellCheckText(inputList);	
     	}
     	double t1 = System.nanoTime();
     	
-    	Text t = new Text();
-    	int i = 0;
+    	
+    	int numErrori = 0;
     	
     	for (RichWord rw : outputList){
-    		t.setText(rw.getWord());
+    		Text t = new Text();
+    		t.setText(rw.getWord() + " ");
     		if(rw.isCorretta()==false){
     			t.setFill(Color.RED);
-    			txtOutput.appendText(rw.getWord()+ " ");
-    			i++;
+    			numErrori++;
     		}
     		
+    		txtOutput.getChildren().addAll(t);
     		}
     	
-    	lblErrori.setText("Ci sono " + i + " errori!!");
+    	lblErrori.setText("Ci sono " + numErrori + " errori!!");
     	lblTime.setText("Tempo impiegato: " + (t1-t0)/(10^9) + "s");
     	
     	}
@@ -107,7 +98,8 @@ public class SpellCheckerController {
     void doReset(ActionEvent event) {
 
     	txtInput.clear();
-    	txtOutput.clear();
+    	txtOutput.getChildren().clear();
+    	
     }
 
     @FXML
