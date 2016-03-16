@@ -1,7 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.BorderPane?>
-	
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.spellchecker.controller.SpellCheckerController">
-	<!-- TODO Add Nodes -->
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.spellchecker.controller.SpellCheckerController">
+   <top>
+      <Label text="Lab_2 Spell Checker" BorderPane.alignment="CENTER" />
+   </top>
+   <center>
+      <VBox alignment="BOTTOM_RIGHT" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="TOP_CENTER" spacing="5.0">
+               <children>
+                  <Label text="Language:" />
+                  <ComboBox fx:id="cboxLanguage" />
+               </children>
+            </HBox>
+            <TextArea fx:id="txtInput" prefHeight="200.0" prefWidth="200.0" />
+            <Button fx:id="btnCheck" mnemonicParsing="false" onAction="#doCheck" text="Spellcheck" />
+            <TextArea fx:id="txtOutput" />
+            <HBox alignment="BOTTOM_RIGHT" spacing="5.0">
+               <children>
+                  <Label fx:id="lblErrori" textFill="#d70909" />
+                  <Button fx:id="btnClear" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#doReset" text="Clear text" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <Label fx:id="lblTime" alignment="TOP_LEFT" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </bottom>
 </BorderPane>
