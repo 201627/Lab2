@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.spellchecker.db.DictionaryDAO;
 import it.polito.tdp.spellchecker.model.Dictionary;
 import it.polito.tdp.spellchecker.model.RichWord;
 import javafx.event.ActionEvent;
@@ -46,7 +47,7 @@ public class SpellCheckerController {
     @FXML
     private Label lblTime;
 
-	private Dictionary ita;
+	private DictionaryDAO ita;
 
 	private Dictionary eng;
 
@@ -117,8 +118,8 @@ public class SpellCheckerController {
         }
 
 
-	public void setModelIta(Dictionary ita) {
-		this.ita = ita;
+	public void setModelIta(DictionaryDAO ita2) {
+		this.ita = ita2;
 		this.ita.loadDictionary();
 	}
 
