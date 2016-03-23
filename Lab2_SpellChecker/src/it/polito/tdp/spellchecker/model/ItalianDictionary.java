@@ -5,12 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ItalianDictionary extends Dictionary {
 	public ItalianDictionary() {
-		dictionary = new ArrayList<RichWord>();
+		dictionary = new HashSet<RichWord>();
 	}
 
 	@Override

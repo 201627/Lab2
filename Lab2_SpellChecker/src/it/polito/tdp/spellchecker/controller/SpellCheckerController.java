@@ -89,7 +89,7 @@ public class SpellCheckerController {
     		}
     	
     	lblErrori.setText("Ci sono " + numErrori + " errori!!");
-    	lblTime.setText("Tempo impiegato: " + (t1-t0)/(10^9) + "s");
+    	lblTime.setText("Tempo impiegato: " + ((t1-t0)/(Math.pow(10, 9))) + "s");
     	
     	}
     
